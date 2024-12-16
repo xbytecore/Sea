@@ -5,6 +5,7 @@ using Mirror;
 public class MovementHandler : NetworkBehaviour
 {
     [Header("Movement Settings")]
+    public ShipNetModel shipNetModel;
     [SerializeField] private float moveSpeed = 5f; // Velocidade de movimento
     [SerializeField] private GameObject projectilePrefab; // Referência ao prefab do projétil
     public Transform shootingPoint; // Ponto de onde o projétil será disparado
@@ -20,31 +21,21 @@ public class MovementHandler : NetworkBehaviour
     void Start()
     {
         // Obtém o componente Rigidbody2D e Animator anexados ao objeto
+      
+
         rb = GetComponent<Rigidbody2D>();
         playerRB = gameObject.GetComponent<Rigidbody2D>();
        // animator = GetComponent<Animator>();
     }
-
+   
     // Chamado a cada frame para capturar entradas
     void Update()
     {
         if (!GetComponent<NetPlayerController>().isOwned) { return; } // Garante que apenas o jogador local controle o movimento e atire
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (!GetComponent<MovementHandler>().canMove)
-            {
-                GetComponent<NetPlayerController>().netClientController.netShipController.GetComponent<ShipMovementHandler>().canMove = false;
-                GetComponent<MovementHandler>().canMove = true;
-            }
-            else
-            {
-                GetComponent<NetPlayerController>().netClientController.netShipController.GetComponent<ShipMovementHandler>().canMove = true;
-                GetComponent<MovementHandler>().canMove = false;
-            }
-        }
+        
 
-        if (!canMove) { return; }
+        if (GetComponent<NetPlayerController>().netClientController.netShipController.gameObject.GetComponent<ShipNetModel>().isLemeOn) { return; }
 
         // Captura as entradas do teclado (horizontal e vertical)
         movementInput.x = Input.GetAxis("Horizontal");
@@ -56,12 +47,7 @@ public class MovementHandler : NetworkBehaviour
             CmdShoot(); // Chama o comando para atirar
         }
 
-        // Rotaciona o personagem de acordo com a direção de movimento
-        if (movementInput.magnitude > 0) // Se o jogador estiver se movendo
-        {
-           // float angle = Mathf.Atan2(movementInput.y, movementInput.x) * Mathf.Rad2Deg;
-            //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        }
+       
 
         // Atualiza o estado da animação
         UpdateAnimation();
@@ -70,13 +56,14 @@ public class MovementHandler : NetworkBehaviour
     // Chamado a cada frame fixo para manipulação de física
     void FixedUpdate()
     {
+        if (!GetComponent<NetPlayerController>().isOwned) { return; }
         ApplyShipVelocityToPlayer();
     }
 
     // Método para aplicar a velocidade do barco ao jogador
     void ApplyShipVelocityToPlayer()
     {
-        if (!canMove)
+        if (GetComponent<NetPlayerController>().netClientController.netShipController.gameObject.GetComponent<ShipNetModel>().isLemeOn)
         {
             // Obtém o Rigidbody2D do barco e do jogador
             Rigidbody2D shipRb = GetComponent<NetPlayerController>().netClientController.netShipController.GetComponent<Rigidbody2D>();

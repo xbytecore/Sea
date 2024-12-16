@@ -52,7 +52,7 @@ public class NetworkManagerCyya : NetworkManager
 
         GameObject netShipGO = Instantiate(netShipPrefab);
 
-        NetShipController netShipController = netShipGO.GetComponent<NetShipController>();
+        ShipNetController netShipController = netShipGO.GetComponent<ShipNetController>();
 
         NetworkServer.Spawn(netShipGO, conn);
 

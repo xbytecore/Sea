@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 6922236322130267060}
   - component: {fileID: 2554880314052679165}
   - component: {fileID: 8151948231911115947}
+  - component: {fileID: 9030195400835626931}
   m_Layer: 0
   m_Name: NetPlayer
   m_TagString: Untagged
@@ -172,7 +173,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -272,6 +273,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  shipNetModel: {fileID: 0}
   moveSpeed: 5
   projectilePrefab: {fileID: 5831634849597856919, guid: 3555d01695e418e4f8aed7fa8718ff29, type: 3}
   shootingPoint: {fileID: 140755592018407710}
@@ -295,6 +297,42 @@ MonoBehaviour:
   syncInterval: 0
   clientAuthority: 1
   animator: {fileID: 2600173914805201887}
+--- !u!58 &9030195400835626931
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7641836955469460354}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.012316942}
+  m_Radius: 1.3281977
 --- !u!1001 &6605515850411024506
 PrefabInstance:
   m_ObjectHideFlags: 0

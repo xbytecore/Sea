@@ -50,8 +50,8 @@ MonoBehaviour:
   headlessStartMode: 0
   editorAutoStart: 0
   sendRate: 60
-  offlineScene: Assets/SeaOfCyya/Scenes/1MainMenu.unity
-  onlineScene: Assets/SeaOfCyya/Scenes/3GamePlay.unity
+  offlineScene: 
+  onlineScene: 
   offlineSceneLoadDelay: 0
   transport: {fileID: 7144350877050451922}
   networkAddress: localhost
@@ -65,6 +65,7 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 7641836955469460354, guid: 712b6a0e8995fda4f9310c0e0571f5d1, type: 3}
   - {fileID: 7641836955469460354, guid: 802f1eaa71c14d34f8145a580d99631f, type: 3}
+  - {fileID: 5831634849597856919, guid: 3555d01695e418e4f8aed7fa8718ff29, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
     bufferTimeMultiplier: 2

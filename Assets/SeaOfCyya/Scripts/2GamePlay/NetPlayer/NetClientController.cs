@@ -3,7 +3,7 @@ using Mirror;
 public class NetClientController : NetworkBehaviour
 {
     public NetPlayerController netPlayerController;
-    public NetShipController   netShipController;
+    public ShipNetController   netShipController;
     public HudManager hudManager;
 
     public ClientInfo clientInfo = new ClientInfo();
@@ -47,7 +47,7 @@ public class NetClientController : NetworkBehaviour
         netPlayerController = newNetPlayerController;
     }
     [TargetRpc]
-    public void TargetAssignNetShipController(NetworkConnectionToClient conn, NetShipController newNetShipController)
+    public void TargetAssignNetShipController(NetworkConnectionToClient conn, ShipNetController newNetShipController)
     {
         netShipController = newNetShipController;
     }

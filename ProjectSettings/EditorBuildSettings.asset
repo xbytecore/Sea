@@ -9,11 +9,13 @@ EditorBuildSettings:
     path: Assets/SeaOfCyya/Scenes/1MainMenu.unity
     guid: 2ad1998270096a94aa3066b58b62110a
   - enabled: 1
-    path: Assets/SeaOfCyya/Scenes/2Lobby.unity
-    guid: 995c47bf11326754ca9ef04c6d6632e8
+    path: Assets/SeaOfCyya/Scenes/2Lobby2 1.unity
+    guid: b40383ca02183f843851e6d9348d7cf4
   - enabled: 1
     path: Assets/SeaOfCyya/Scenes/3GamePlay.unity
     guid: 43ed08a2bd87e264b9c0bcdbe50e2fc5
   m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 7bb9560c3554f774bb05094db5e0ec12, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: f82f47fb7f0b51a4d8ed0c6a3a99467e, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

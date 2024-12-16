@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class ShipMovementHandler : MonoBehaviour
 {
+    public ShipNetModel shipNetModel;
     [Header("Ship Settings")]
      private float thrustForce = 50f; // Força de propulsão
      private float rotationSpeed = 5f; // Velocidade de rotação
@@ -19,6 +20,7 @@ public class ShipMovementHandler : MonoBehaviour
     void Start()
     {
         // Obtém o Rigidbody2D
+        shipNetModel = GetComponent<ShipNetModel>();
         rb = GetComponent<Rigidbody2D>();
         rb.linearDamping = drag; // Configura o arrasto
     }
@@ -26,27 +28,33 @@ public class ShipMovementHandler : MonoBehaviour
     // Chamado a cada frame para capturar entradas
     void Update()
     {
-        if (!canMove) { return; }
+       // if (!canMove) { return; }
 
         // Captura as entradas do jogador
-        thrustInput = Input.GetAxis("Vertical"); // Frente/Trás (W/S ou Setas Cima/Baixo)
+     //   thrustInput = Input.GetAxis("Vertical"); // Frente/Trás (W/S ou Setas Cima/Baixo)
         rotationInput = Input.GetAxis("Horizontal"); // Esquerda/Direita (A/D ou Setas)
     }
 
     // Chamado a cada frame fixo para manipulação de física
     void FixedUpdate()
     {
-        if (!canMove) { return; }
+        //   if (!canMove) { return; }
 
         // Aplica a rotação
-        float targetRotation = rotationInput * rotationSpeed * Time.fixedDeltaTime;
-        rb.rotation += targetRotation; // Aplica a rotação diretamente
+        if (shipNetModel.isLemeOn)
+        {
+            float targetRotation = rotationInput * rotationSpeed * Time.fixedDeltaTime;
+            rb.rotation += targetRotation; // Aplica a rotação diretamente
+        }
+        
+     
 
         // Suavização da rotação: Aplique apenas se necessário
         // rb.rotation = Mathf.LerpAngle(rb.rotation, rb.rotation + targetRotation, rotationSmoothness * Time.fixedDeltaTime);
 
         // Aplica a força de propulsão na direção em que o navio está apontando
-        Vector2 force = transform.up * thrustInput * thrustForce;
+        if (shipNetModel.isAncorOn || !shipNetModel.isVelaOn) { return; }
+        Vector2 force = transform.up * 1 * thrustForce;
         rb.AddForce(force);
     }
 }

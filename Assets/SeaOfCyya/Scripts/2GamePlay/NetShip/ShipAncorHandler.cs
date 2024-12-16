@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NetShipModel : MonoBehaviour
+public class ShipAncorHandler : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
