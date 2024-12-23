@@ -16,13 +16,14 @@ public class MovementHandler : NetworkBehaviour
     public bool canMove;
 
     public Rigidbody2D playerRB;
+    public  CombatController combatController;
 
     // Chamado uma vez quando o objeto é inicializado
     void Start()
     {
         // Obtém o componente Rigidbody2D e Animator anexados ao objeto
       
-
+        combatController = GetComponent<CombatController>();    
         rb = GetComponent<Rigidbody2D>();
         playerRB = gameObject.GetComponent<Rigidbody2D>();
        // animator = GetComponent<Animator>();
@@ -36,7 +37,13 @@ public class MovementHandler : NetworkBehaviour
         
 
         if (GetComponent<NetPlayerController>().netClientController.netShipController.gameObject.GetComponent<ShipNetModel>().isLemeOn) { return; }
+        if (!combatController.combatModel.canAttack) {
+            rb.linearVelocity = Vector3.zero;
 
+            // Zerar a velocidade angular (rotação)
+            rb.angularVelocity = 0;
+
+            return; }
         // Captura as entradas do teclado (horizontal e vertical)
         movementInput.x = Input.GetAxis("Horizontal");
         movementInput.y = Input.GetAxis("Vertical");
@@ -75,6 +82,17 @@ public class MovementHandler : NetworkBehaviour
         {
             // Quando o jogador pode mover, aplica o movimento controlado
             playerRB.linearVelocity = movementInput * moveSpeed;
+        }
+
+        if (movementInput.x > 0) // Se o jogador se mover para a direita
+        {
+            // Gira para a direita (sem rotação no eixo Y)
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (movementInput.x < 0) // Se o jogador se mover para a esquerda
+        {
+            // Gira 180 graus no eixo Y para virar para a esquerda
+            transform.rotation = Quaternion.Euler(0, 180, 0);
         }
     }
 

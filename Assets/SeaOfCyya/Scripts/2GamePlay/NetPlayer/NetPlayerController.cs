@@ -39,11 +39,10 @@ public class NetPlayerController : NetworkBehaviour
         if (Camera.main != null)
         {
             // Define a Main Camera como filha deste GameObject
-            Camera.main.transform.SetParent(transform);
+            Camera.main.GetComponent<CamHandler>().player = gameObject.transform;
 
             // Ajusta a posi��o relativa (opcional)
-            Camera.main.transform.localPosition = new Vector3(0, 5, -15); // Posi��o relativa
-            Camera.main.transform.localRotation = Quaternion.Euler(10, 0, 0); // Rota��o relativa
+
         }
         else
         {

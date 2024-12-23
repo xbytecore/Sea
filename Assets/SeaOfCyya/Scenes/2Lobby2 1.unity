@@ -195,6 +195,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 43616346}
   m_CullTransparentMesh: 1
+--- !u!1 &160104525
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 160104527}
+  - component: {fileID: 160104526}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &160104526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160104525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f84591ce72545258ea98cb7518d8b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &160104527
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160104525}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -126.1, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &182770061
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,7 +888,7 @@ MonoBehaviour:
   editorAutoStart: 0
   sendRate: 60
   offlineScene: Assets/SeaOfCyya/Scenes/1MainMenu.unity
-  onlineScene: Assets/SeaOfCyya/Scenes/3GamePlay.unity
+  onlineScene: Assets/SeaOfCyya/Scenes/3Gameplay.unity
   offlineSceneLoadDelay: 1
   transport: {fileID: 1702784851}
   networkAddress: 15.229.79.195
@@ -854,11 +898,12 @@ MonoBehaviour:
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 8126060167566187724, guid: daa06174445ca5d44b798fae4b48b4aa, type: 3}
   autoCreatePlayer: 1
-  playerSpawnMethod: 0
+  playerSpawnMethod: 1
   spawnPrefabs:
   - {fileID: 7641836955469460354, guid: 712b6a0e8995fda4f9310c0e0571f5d1, type: 3}
   - {fileID: 7641836955469460354, guid: 802f1eaa71c14d34f8145a580d99631f, type: 3}
   - {fileID: 5831634849597856919, guid: 3555d01695e418e4f8aed7fa8718ff29, type: 3}
+  - {fileID: 7641836955469460354, guid: 2da012dc8449f0d40857ccaab4334f35, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
     bufferTimeMultiplier: 2
@@ -876,6 +921,7 @@ MonoBehaviour:
   timeInterpolationGui: 0
   netPlayerPrefab: {fileID: 7641836955469460354, guid: 712b6a0e8995fda4f9310c0e0571f5d1, type: 3}
   netShipPrefab: {fileID: 7641836955469460354, guid: 802f1eaa71c14d34f8145a580d99631f, type: 3}
+  netMobPrefab: {fileID: 7641836955469460354, guid: 2da012dc8449f0d40857ccaab4334f35, type: 3}
 --- !u!4 &1702784853
 Transform:
   m_ObjectHideFlags: 0
@@ -978,3 +1024,4 @@ SceneRoots:
   - {fileID: 389050200}
   - {fileID: 2066560771}
   - {fileID: 1702784853}
+  - {fileID: 160104527}

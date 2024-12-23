@@ -5,6 +5,7 @@ public class NetworkManagerCyya : NetworkManager
 {
     public GameObject netPlayerPrefab;
     public GameObject netShipPrefab;
+    public GameObject netMobPrefab;
 
 
     private void Start()
@@ -14,6 +15,24 @@ public class NetworkManagerCyya : NetworkManager
 
         return;
 #endif
+    }
+
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+
+        InvokeRepeating("SpawnMob", 1,15);
+    }
+    public void SpawnMob()
+    {
+        // Instancia o mob no servidor
+        GameObject mob = Instantiate(netMobPrefab, netMobPrefab.transform.position, netMobPrefab.transform.rotation);
+
+        mob.transform.Translate(-3, 0, 0);
+        // Spawna o mob na rede, sem dono
+        NetworkServer.Spawn(mob);
+
+        Debug.Log("Mob spawnado pelo servidor!");
     }
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
