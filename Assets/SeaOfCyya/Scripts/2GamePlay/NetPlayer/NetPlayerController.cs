@@ -1,12 +1,21 @@
 using UnityEngine;
 using Mirror;
+using Unity.VisualScripting;
+
 public class NetPlayerController : NetworkBehaviour
 {
     public NetClientController netClientController;
+    
+
+ //   public Inventory inventory;
 
     private void Start()
     {
 
+    }
+    public Vector3 GetPosition()
+    {
+        return transform.position; 
     }
 
     public override void OnStartClient()
@@ -32,6 +41,7 @@ public class NetPlayerController : NetworkBehaviour
     public void SetStartNewPlayer()
     {
         SetAssingCamera();
+        ResourceInventoryController.instance.netPlayerController = this;
     }
 
     public void SetAssingCamera()
@@ -104,7 +114,30 @@ public class NetPlayerController : NetworkBehaviour
 
             Debug.Log("shipDamagedHandler");
         }
+        
+        if (collision.GetComponent<Collider2D>().gameObject.TryGetComponent<ResourceItemWorldHandler>(out ResourceItemWorldHandler resourceItemWorldHandler))
+        {
+            Debug.Log("resource");
 
+            ResourceInventoryController.instance.SpawnItemInSlot(resourceItemWorldHandler.model, 0,true);
+
+            SetDestroyItemCmd(resourceItemWorldHandler.gameObject);
+
+        }
+        
+    }
+
+    [Command]
+    public void SetCreateItemCmd(ResourceItemModelScriptable newItem, int id, Vector3 newPos)
+    {
+        ResourceInventoryController.instance.SetSpawnWorldItem(newItem, id, newPos);    
+    }
+    [Command]
+    public void SetDestroyItemCmd(GameObject receiver)
+    {
+        ResourceItemWorldHandler serverReceiver = receiver.GetComponent<NetworkIdentity>().gameObject.GetComponent<ResourceItemWorldHandler>();
+
+        serverReceiver.SetDestroy();
     }
 
     public void OnTriggerExit2D(Collider2D collision)

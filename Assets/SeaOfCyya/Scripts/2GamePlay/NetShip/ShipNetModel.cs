@@ -30,6 +30,7 @@ public class ShipNetModel : NetworkBehaviour
     public void WaitToStart()
     {
         OnVela.Invoke(isVelaOn);
+        OnAnchor.Invoke(isAncorOn);
     }
 
 

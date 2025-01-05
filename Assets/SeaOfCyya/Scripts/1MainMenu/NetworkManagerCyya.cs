@@ -8,6 +8,7 @@ public class NetworkManagerCyya : NetworkManager
     public GameObject netMobPrefab;
 
 
+
     private void Start()
     {
 #if UNITY_STANDALONE_LINUX || PLATFORM_STANDALONE_LINUX || UNITY_STANDALONE_LINUX_API
@@ -23,15 +24,37 @@ public class NetworkManagerCyya : NetworkManager
 
         InvokeRepeating("SpawnMob", 1,15);
     }
+    public void SpawnItem()
+    {
+        if (FindObjectsOfType<ResourceItemWorldHandler>().Length > 10) { return; }
+
+
+        Transform newPosition = ResourceInventoryController.instance.itemSpawnPosition;
+
+        ResourceItemModelScriptable newResourceItemModel = new ResourceItemModelScriptable();
+
+        newResourceItemModel.SetInfos();
+
+        ResourceInventoryController.instance.SetSpawnWorldItem(newResourceItemModel,0, newPosition.position);
+
+    }
     public void SpawnMob()
     {
         // Instancia o mob no servidor
-        GameObject mob = Instantiate(netMobPrefab, netMobPrefab.transform.position, netMobPrefab.transform.rotation);
+        SpawnItem();
 
-        mob.transform.Translate(-3, 0, 0);
+
+        if (FindObjectsOfType<CombatController>().Length > 10) { return; }
+
+        Transform newPosition = ResourceInventoryController.instance.mobSpawnPosition;
+
+        GameObject mob = Instantiate(netMobPrefab, newPosition.position, netMobPrefab.transform.rotation);
+
+      
         // Spawna o mob na rede, sem dono
         NetworkServer.Spawn(mob);
 
+     
         Debug.Log("Mob spawnado pelo servidor!");
     }
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)

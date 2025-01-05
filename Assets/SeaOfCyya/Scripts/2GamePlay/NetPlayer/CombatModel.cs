@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine.Events;
+
 public class CombatModel : NetworkBehaviour
 {
     [SyncVar(hook = nameof(OnSetLifeChanged))]
@@ -86,6 +87,18 @@ public class CombatModel : NetworkBehaviour
 
         if(lifeCurrent > 0) { return; }
 
+
+
+        NetworkConnectionToClient conn = gameObject.GetComponent<NetworkIdentity>().connectionToClient;
+
+        if (conn == null) // mob
+        {
+            ResourceItemModelScriptable newResourceItemModel = new ResourceItemModelScriptable();
+
+            newResourceItemModel.SetInfos();
+
+            ResourceInventoryController.instance.SetSpawnWorldItem(newResourceItemModel, 1, transform.position);
+        }
         
 
         NetworkServer.Destroy(gameObject);
